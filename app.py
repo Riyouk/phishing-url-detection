@@ -75,7 +75,7 @@ def index():
                 safe_prob = 5.0
 
         except Exception as e:
-            error = "Invalid URL or server error"
+            error = f"Error: {str(e)}"
 
     return render_template(
         "index.html",
