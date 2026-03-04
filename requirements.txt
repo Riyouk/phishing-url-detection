@@ -1,7 +1,10 @@
-beautifulsoup4
 Flask
-googlesearch-python
 numpy
 pandas
 scikit-learn
+requests
+beautifulsoup4
+googlesearch-python
+python-whois
+python-dateutil
 gunicorn
