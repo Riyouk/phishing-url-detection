@@ -3,24 +3,28 @@ import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import GradientBoostingClassifier
 
-# load dataset
+# Load dataset
 data = pd.read_csv("phishing.csv")
 
-print("Columns:", data.columns)
+# 🔥 IMPORTANT FIX
+if "Index" in data.columns:
+    data = data.drop("Index", axis=1)
 
-# last column is the label
-X = data.iloc[:, :-1]
-y = data.iloc[:, -1]
+# Split data
+X = data.drop("class", axis=1)
+y = data["class"]
 
-# split dataset
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
-# train model
+# Train model
 model = GradientBoostingClassifier()
 model.fit(X_train, y_train)
 
-# save model
+# Save model
 with open("pickle/model.pkl", "wb") as f:
     pickle.dump(model, f)
 
-print("Model trained and saved successfully")
+print("✅ Model retrained successfully with correct features")
